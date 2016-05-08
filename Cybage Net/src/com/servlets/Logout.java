@@ -25,8 +25,10 @@ public class Logout extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession hs = request.getSession();
 		List<String> count =(List<String>)hs.getAttribute("count");
+		count.remove(hs.getAttribute("uname"));
+		hs.setAttribute("count", count.size());
 		hs.invalidate();
-		count.remove(request.getAttribute("uname"));
+		
 		PrintWriter pw = response.getWriter();
 		pw.print("User logged out successfully");
 		

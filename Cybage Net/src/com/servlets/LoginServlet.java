@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 		{
 		String username =(String) request.getSession().getAttribute("uname");
 		logDao =(LoginDao)request.getSession().getAttribute("loginDao");
-		//String type = request.getParameter("type");
+		
 		
 		session=request.getSession();
 		pw.println("<h2 align='center'>Welcome "+username+"</h2>");
@@ -68,13 +68,13 @@ public class LoginServlet extends HttpServlet {
 				}
 				else
 				{
-					count.add(status);
-					session.setAttribute("count", count);
+					count.add(username);
 					UserDao uDao = new UserDao(logDao.getCon());
 					session.setAttribute("userDao",uDao);
 					RequestDispatcher rd = request.getRequestDispatcher("user.html");
 					rd.include(request, response);
 				}
+				
 				session.setAttribute("count", count);
 				
 					

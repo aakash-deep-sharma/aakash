@@ -53,21 +53,15 @@ public class LoginFilter implements Filter {
 		{
 			String result = logDao.checkUserCredintials(username, password);
 			request.setAttribute("status",result);
-			if(result.contains("f"))
+			if(!result.contains("f"))
 			{
-				System.out.println("failed");
-				RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
-				rd.forward(request, response);
-			}
-			else
-			{	
 				System.out.println("login");
 				logDao.genrateLog(username);
 				session.setAttribute("loginDao",logDao);
 				session.setAttribute("uname",username);
-				RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
-				rd.forward(request, response);
 			}
+			RequestDispatcher rd = request.getRequestDispatcher("LoginServlet");
+			rd.forward(request, response);
 			
 		}
 		catch (SQLException e)
